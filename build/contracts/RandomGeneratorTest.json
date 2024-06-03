@@ -1,0 +1,186 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "allSourcePaths": {
+    "1": "contracts/RandomGeneratorTest.sol"
+  },
+  "ast": {
+    "absolutePath": "contracts/RandomGeneratorTest.sol",
+    "exportedSymbols": {
+      "RandomGeneratorTest": [
+        9
+      ]
+    },
+    "id": 10,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RandomGeneratorTest",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 9,
+        "linearizedBaseContracts": [
+          9
+        ],
+        "name": "RandomGeneratorTest",
+        "nameLocation": "66:19:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 7,
+              "nodeType": "Block",
+              "src": "106:8:1",
+              "statements": []
+            },
+            "id": 8,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "103:2:1"
+            },
+            "returnParameters": {
+              "id": 6,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "106:0:1"
+            },
+            "scope": 9,
+            "src": "92:22:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 10,
+        "src": "57:59:1",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "32:84:1"
+  },
+  "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220f09abd6a9c8fb8ecdde02aea0f8973aa17640a54103ee6217235561de76d772964736f6c63430008190033",
+  "bytecodeSha1": "73df0a6f5d0123eb2b2db0faf62b602aa77c123a",
+  "compiler": {
+    "evm_version": "istanbul",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "version": "0.8.25+commit.b61c2a91"
+  },
+  "contractName": "RandomGeneratorTest",
+  "coverageMap": {
+    "branches": {
+      "1": {}
+    },
+    "statements": {
+      "1": {}
+    }
+  },
+  "dependencies": [],
+  "deployedBytecode": "6080604052600080fdfea2646970667358221220f09abd6a9c8fb8ecdde02aea0f8973aa17640a54103ee6217235561de76d772964736f6c63430008190033",
+  "deployedSourceMap": "57:59:1:-:0;;;;;",
+  "language": "Solidity",
+  "natspec": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "offset": [
+    57,
+    116
+  ],
+  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 CREATE SWAP11 0xBD PUSH11 0x9C8FB8ECDDE02AEA0F8973 0xAA OR PUSH5 0xA54103EE6 0x21 PUSH19 0x35561DE76D772964736F6C6343000819003300 ",
+  "pcMap": {
+    "0": {
+      "offset": [
+        57,
+        116
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x80"
+    },
+    "2": {
+      "fn": null,
+      "offset": [
+        57,
+        116
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "4": {
+      "fn": null,
+      "offset": [
+        57,
+        116
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "5": {
+      "fn": null,
+      "offset": [
+        57,
+        116
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "7": {
+      "fn": null,
+      "offset": [
+        57,
+        116
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "8": {
+      "fn": null,
+      "offset": [
+        57,
+        116
+      ],
+      "op": "REVERT",
+      "path": "1"
+    }
+  },
+  "sha1": "042f2ad4a1aea566fd15d0dc22a44981a2ef34e0",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract RandomGeneratorTest {\n    constructor() {\n\n    }\n}",
+  "sourceMap": "57:59:1:-:0;;;92:22;;;;;;;;;;57:59;;;;;;",
+  "sourcePath": "contracts/RandomGeneratorTest.sol",
+  "type": "contract"
+}
