@@ -1,27 +1,94 @@
 {
   "abi": [
     {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "seed",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "yieldSize",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint256",
+          "name": "count",
+          "type": "uint256"
+        }
+      ],
+      "name": "runKrng",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "result10000s",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "seed",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "count",
+          "type": "uint256"
+        }
+      ],
+      "name": "runlcg",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "result10000s",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
     }
   ],
   "allSourcePaths": {
+    "0": "contracts/RandomGenerator.sol",
     "1": "contracts/RandomGeneratorTest.sol"
   },
   "ast": {
     "absolutePath": "contracts/RandomGeneratorTest.sol",
     "exportedSymbols": {
+      "Keccak256RG": [
+        361
+      ],
+      "LinearCongretureGenerator": [
+        477
+      ],
       "RandomGeneratorTest": [
-        9
+        110
+      ],
+      "bytes32Keccak": [
+        180
+      ],
+      "reduceXOR": [
+        169
+      ],
+      "reduceXOR32": [
+        128
+      ],
+      "scaling": [
+        199
       ]
     },
-    "id": 10,
+    "id": 111,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4,
+        "id": 1,
         "literals": [
           "solidity",
           "^",
@@ -32,63 +99,1292 @@
         "src": "32:23:1"
       },
       {
+        "absolutePath": "contracts/RandomGenerator.sol",
+        "file": "./RandomGenerator.sol",
+        "id": 2,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 111,
+        "sourceUnit": 478,
+        "src": "57:31:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
         "abstract": false,
         "baseContracts": [],
         "canonicalName": "RandomGeneratorTest",
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 9,
+        "id": 110,
         "linearizedBaseContracts": [
-          9
+          110
         ],
         "name": "RandomGeneratorTest",
-        "nameLocation": "66:19:1",
+        "nameLocation": "99:19:1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "body": {
-              "id": 7,
-              "nodeType": "Block",
-              "src": "106:8:1",
-              "statements": []
+            "global": false,
+            "id": 6,
+            "libraryName": {
+              "id": 3,
+              "name": "Keccak256RG",
+              "nameLocations": [
+                "131:11:1"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 361,
+              "src": "131:11:1"
             },
-            "id": 8,
+            "nodeType": "UsingForDirective",
+            "src": "125:48:1",
+            "typeName": {
+              "id": 5,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 4,
+                "name": "Keccak256RG.KeccakRGState",
+                "nameLocations": [
+                  "147:11:1",
+                  "159:13:1"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 213,
+                "src": "147:25:1"
+              },
+              "referencedDeclaration": 213,
+              "src": "147:25:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_KeccakRGState_$213_storage_ptr",
+                "typeString": "struct Keccak256RG.KeccakRGState"
+              }
+            }
+          },
+          {
+            "global": false,
+            "id": 10,
+            "libraryName": {
+              "id": 7,
+              "name": "LinearCongretureGenerator",
+              "nameLocations": [
+                "184:25:1"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 477,
+              "src": "184:25:1"
+            },
+            "nodeType": "UsingForDirective",
+            "src": "178:71:1",
+            "typeName": {
+              "id": 9,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 8,
+                "name": "LinearCongretureGenerator.LCGState",
+                "nameLocations": [
+                  "214:25:1",
+                  "240:8:1"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 372,
+                "src": "214:34:1"
+              },
+              "referencedDeclaration": 372,
+              "src": "214:34:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LCGState_$372_storage_ptr",
+                "typeString": "struct LinearCongretureGenerator.LCGState"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 60,
+              "nodeType": "Block",
+              "src": "371:231:1",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 28,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 22,
+                      "name": "result10000s",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20,
+                      "src": "381:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 26,
+                          "name": "count",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 16,
+                          "src": "410:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 25,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "NewExpression",
+                        "src": "396:13:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                          "typeString": "function (uint256) pure returns (uint256[] memory)"
+                        },
+                        "typeName": {
+                          "baseType": {
+                            "id": 23,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "400:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "id": 24,
+                          "nodeType": "ArrayTypeName",
+                          "src": "400:9:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                            "typeString": "uint256[]"
+                          }
+                        }
+                      },
+                      "id": 27,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "396:20:1",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    "src": "381:35:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                      "typeString": "uint256[] memory"
+                    }
+                  },
+                  "id": 29,
+                  "nodeType": "ExpressionStatement",
+                  "src": "381:35:1"
+                },
+                {
+                  "assignments": [
+                    34
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 34,
+                      "mutability": "mutable",
+                      "name": "kst",
+                      "nameLocation": "459:3:1",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 60,
+                      "src": "426:36:1",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_KeccakRGState_$213_memory_ptr",
+                        "typeString": "struct Keccak256RG.KeccakRGState"
+                      },
+                      "typeName": {
+                        "id": 33,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 32,
+                          "name": "Keccak256RG.KeccakRGState",
+                          "nameLocations": [
+                            "426:11:1",
+                            "438:13:1"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 213,
+                          "src": "426:25:1"
+                        },
+                        "referencedDeclaration": 213,
+                        "src": "426:25:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_KeccakRGState_$213_storage_ptr",
+                          "typeString": "struct Keccak256RG.KeccakRGState"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 40,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 37,
+                        "name": "seed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12,
+                        "src": "482:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "id": 38,
+                        "name": "yieldSize",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 14,
+                        "src": "488:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      ],
+                      "expression": {
+                        "id": 35,
+                        "name": "Keccak256RG",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 361,
+                        "src": "465:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_Keccak256RG_$361_$",
+                          "typeString": "type(library Keccak256RG)"
+                        }
+                      },
+                      "id": 36,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "477:4:1",
+                      "memberName": "init",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 256,
+                      "src": "465:16:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_uint64_$returns$_t_struct$_KeccakRGState_$213_memory_ptr_$",
+                        "typeString": "function (bytes32,uint64) pure returns (struct Keccak256RG.KeccakRGState memory)"
+                      }
+                    },
+                    "id": 39,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "465:33:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_KeccakRGState_$213_memory_ptr",
+                      "typeString": "struct Keccak256RG.KeccakRGState memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "426:72:1"
+                },
+                {
+                  "body": {
+                    "id": 58,
+                    "nodeType": "Block",
+                    "src": "537:59:1",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 56,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 50,
+                              "name": "result10000s",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 20,
+                              "src": "551:12:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                                "typeString": "uint256[] memory"
+                              }
+                            },
+                            "id": 52,
+                            "indexExpression": {
+                              "id": 51,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 42,
+                              "src": "564:1:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "551:15:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "id": 53,
+                                "name": "kst",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 34,
+                                "src": "569:3:1",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_struct$_KeccakRGState_$213_memory_ptr",
+                                  "typeString": "struct Keccak256RG.KeccakRGState memory"
+                                }
+                              },
+                              "id": 54,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "573:10:1",
+                              "memberName": "yield10000",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 360,
+                              "src": "569:14:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_pure$_t_struct$_KeccakRGState_$213_memory_ptr_$returns$_t_uint16_$attached_to$_t_struct$_KeccakRGState_$213_memory_ptr_$",
+                                "typeString": "function (struct Keccak256RG.KeccakRGState memory) pure returns (uint16)"
+                              }
+                            },
+                            "id": 55,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "569:16:1",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint16",
+                              "typeString": "uint16"
+                            }
+                          },
+                          "src": "551:34:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 57,
+                        "nodeType": "ExpressionStatement",
+                        "src": "551:34:1"
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 46,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 44,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 42,
+                      "src": "523:1:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "id": 45,
+                      "name": "count",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16,
+                      "src": "525:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "523:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 59,
+                  "initializationExpression": {
+                    "assignments": [
+                      42
+                    ],
+                    "declarations": [
+                      {
+                        "constant": false,
+                        "id": 42,
+                        "mutability": "mutable",
+                        "name": "i",
+                        "nameLocation": "520:1:1",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 59,
+                        "src": "512:9:1",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 41,
+                          "name": "uint256",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "512:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "visibility": "internal"
+                      }
+                    ],
+                    "id": 43,
+                    "nodeType": "VariableDeclarationStatement",
+                    "src": "512:9:1"
+                  },
+                  "isSimpleCounterLoop": true,
+                  "loopExpression": {
+                    "expression": {
+                      "id": 48,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "532:3:1",
+                      "subExpression": {
+                        "id": 47,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 42,
+                        "src": "532:1:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 49,
+                    "nodeType": "ExpressionStatement",
+                    "src": "532:3:1"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "508:88:1"
+                }
+              ]
+            },
+            "functionSelector": "c227888d",
+            "id": 61,
             "implemented": true,
-            "kind": "constructor",
+            "kind": "function",
             "modifiers": [],
-            "name": "",
-            "nameLocation": "-1:-1:-1",
+            "name": "runKrng",
+            "nameLocation": "264:7:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5,
+              "id": 17,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "103:2:1"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12,
+                  "mutability": "mutable",
+                  "name": "seed",
+                  "nameLocation": "280:4:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 61,
+                  "src": "272:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 11,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "272:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 14,
+                  "mutability": "mutable",
+                  "name": "yieldSize",
+                  "nameLocation": "293:9:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 61,
+                  "src": "286:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 13,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "286:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16,
+                  "mutability": "mutable",
+                  "name": "count",
+                  "nameLocation": "312:5:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 61,
+                  "src": "304:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 15,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "304:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "271:47:1"
             },
             "returnParameters": {
-              "id": 6,
+              "id": 21,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "106:0:1"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20,
+                  "mutability": "mutable",
+                  "name": "result10000s",
+                  "nameLocation": "357:12:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 61,
+                  "src": "340:29:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 18,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "340:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 19,
+                    "nodeType": "ArrayTypeName",
+                    "src": "340:9:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "339:31:1"
             },
-            "scope": 9,
-            "src": "92:22:1",
-            "stateMutability": "nonpayable",
+            "scope": 110,
+            "src": "255:347:1",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 108,
+              "nodeType": "Block",
+              "src": "704:243:1",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 77,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 71,
+                      "name": "result10000s",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 69,
+                      "src": "714:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 75,
+                          "name": "count",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 65,
+                          "src": "743:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 74,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "NewExpression",
+                        "src": "729:13:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                          "typeString": "function (uint256) pure returns (uint256[] memory)"
+                        },
+                        "typeName": {
+                          "baseType": {
+                            "id": 72,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "733:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "id": 73,
+                          "nodeType": "ArrayTypeName",
+                          "src": "733:9:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                            "typeString": "uint256[]"
+                          }
+                        }
+                      },
+                      "id": 76,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "729:20:1",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    "src": "714:35:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                      "typeString": "uint256[] memory"
+                    }
+                  },
+                  "id": 78,
+                  "nodeType": "ExpressionStatement",
+                  "src": "714:35:1"
+                },
+                {
+                  "assignments": [
+                    83
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 83,
+                      "mutability": "mutable",
+                      "name": "lst",
+                      "nameLocation": "801:3:1",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 108,
+                      "src": "759:45:1",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_LCGState_$372_memory_ptr",
+                        "typeString": "struct LinearCongretureGenerator.LCGState"
+                      },
+                      "typeName": {
+                        "id": 82,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 81,
+                          "name": "LinearCongretureGenerator.LCGState",
+                          "nameLocations": [
+                            "759:25:1",
+                            "785:8:1"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 372,
+                          "src": "759:34:1"
+                        },
+                        "referencedDeclaration": 372,
+                        "src": "759:34:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LCGState_$372_storage_ptr",
+                          "typeString": "struct LinearCongretureGenerator.LCGState"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 88,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 86,
+                        "name": "seed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 63,
+                        "src": "838:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "id": 84,
+                        "name": "LinearCongretureGenerator",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 477,
+                        "src": "807:25:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LinearCongretureGenerator_$477_$",
+                          "typeString": "type(library LinearCongretureGenerator)"
+                        }
+                      },
+                      "id": 85,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "833:4:1",
+                      "memberName": "init",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 393,
+                      "src": "807:30:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_struct$_LCGState_$372_memory_ptr_$",
+                        "typeString": "function (bytes32) pure returns (struct LinearCongretureGenerator.LCGState memory)"
+                      }
+                    },
+                    "id": 87,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "807:36:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_LCGState_$372_memory_ptr",
+                      "typeString": "struct LinearCongretureGenerator.LCGState memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "759:84:1"
+                },
+                {
+                  "body": {
+                    "id": 106,
+                    "nodeType": "Block",
+                    "src": "882:59:1",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 104,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 98,
+                              "name": "result10000s",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 69,
+                              "src": "896:12:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                                "typeString": "uint256[] memory"
+                              }
+                            },
+                            "id": 100,
+                            "indexExpression": {
+                              "id": 99,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 90,
+                              "src": "909:1:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "896:15:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "id": 101,
+                                "name": "lst",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 83,
+                                "src": "914:3:1",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_struct$_LCGState_$372_memory_ptr",
+                                  "typeString": "struct LinearCongretureGenerator.LCGState memory"
+                                }
+                              },
+                              "id": 102,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "918:10:1",
+                              "memberName": "yield10000",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 476,
+                              "src": "914:14:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_pure$_t_struct$_LCGState_$372_memory_ptr_$returns$_t_uint16_$attached_to$_t_struct$_LCGState_$372_memory_ptr_$",
+                                "typeString": "function (struct LinearCongretureGenerator.LCGState memory) pure returns (uint16)"
+                              }
+                            },
+                            "id": 103,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "914:16:1",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint16",
+                              "typeString": "uint16"
+                            }
+                          },
+                          "src": "896:34:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 105,
+                        "nodeType": "ExpressionStatement",
+                        "src": "896:34:1"
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 94,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 92,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 90,
+                      "src": "868:1:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "id": 93,
+                      "name": "count",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 65,
+                      "src": "870:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "868:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 107,
+                  "initializationExpression": {
+                    "assignments": [
+                      90
+                    ],
+                    "declarations": [
+                      {
+                        "constant": false,
+                        "id": 90,
+                        "mutability": "mutable",
+                        "name": "i",
+                        "nameLocation": "865:1:1",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 107,
+                        "src": "857:9:1",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 89,
+                          "name": "uint256",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "857:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "visibility": "internal"
+                      }
+                    ],
+                    "id": 91,
+                    "nodeType": "VariableDeclarationStatement",
+                    "src": "857:9:1"
+                  },
+                  "isSimpleCounterLoop": true,
+                  "loopExpression": {
+                    "expression": {
+                      "id": 96,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "877:3:1",
+                      "subExpression": {
+                        "id": 95,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 90,
+                        "src": "877:1:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 97,
+                    "nodeType": "ExpressionStatement",
+                    "src": "877:3:1"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "853:88:1"
+                }
+              ]
+            },
+            "functionSelector": "ee00ac89",
+            "id": 109,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "runlcg",
+            "nameLocation": "616:6:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 66,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 63,
+                  "mutability": "mutable",
+                  "name": "seed",
+                  "nameLocation": "631:4:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 109,
+                  "src": "623:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 62,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "623:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 65,
+                  "mutability": "mutable",
+                  "name": "count",
+                  "nameLocation": "645:5:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 109,
+                  "src": "637:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 64,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "637:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "622:29:1"
+            },
+            "returnParameters": {
+              "id": 70,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 69,
+                  "mutability": "mutable",
+                  "name": "result10000s",
+                  "nameLocation": "690:12:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 109,
+                  "src": "673:29:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 67,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "673:7:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 68,
+                    "nodeType": "ArrayTypeName",
+                    "src": "673:9:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "672:31:1"
+            },
+            "scope": 110,
+            "src": "607:340:1",
+            "stateMutability": "pure",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 10,
-        "src": "57:59:1",
+        "scope": 111,
+        "src": "90:859:1",
         "usedErrors": [],
         "usedEvents": []
       }
     ],
-    "src": "32:84:1"
+    "src": "32:917:1"
   },
-  "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220f09abd6a9c8fb8ecdde02aea0f8973aa17640a54103ee6217235561de76d772964736f6c63430008190033",
-  "bytecodeSha1": "73df0a6f5d0123eb2b2db0faf62b602aa77c123a",
+  "bytecode": "6080604052348015600f57600080fd5b5061056b8061001f6000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063c227888d1461003b578063ee00ac8914610064575b600080fd5b61004e6100493660046103ec565b610077565b60405161005b9190610431565b60405180910390f35b61004e610072366004610475565b610112565b60608167ffffffffffffffff81111561009257610092610497565b6040519080825280602002602001820160405280156100bb578160200160208202803683370190505b50905060006100ca85856101ab565b905060005b83811015610109576100e08261024d565b61ffff168382815181106100f6576100f66104ad565b60209081029190910101526001016100cf565b50509392505050565b60608167ffffffffffffffff81111561012d5761012d610497565b604051908082528060200260200182016040528015610156578160200160208202803683370190505b509050600061016484610271565b905060005b838110156101a35761017a82610293565b61ffff16838281518110610190576101906104ad565b6020908102919091010152600101610169565b505092915050565b604080516080810182526000808252602080830182815293830182905260608301829052858252808220808452825290209091526101eb826101006104d9565b67ffffffffffffffff16156102375760405162461bcd60e51b815260206004820152600e60248201526d6b726e67207969656c6453697a6560901b604482015260640160405180910390fd5b67ffffffffffffffff9091166040820152919050565b600061026b61025b836102ce565b61ffff1662010000612710610336565b92915050565b60408051602081019091526000815261028982610352565b60e01c8152919050565b600064010000000082600001516219660d02633c6ef35f01816102b8576102b86104c3565b0680835261026b90640100000000612710610336565b6000816040015167ffffffffffffffff166010146102eb57600080fd5b816060015167ffffffffffffffff166101000361030b5761030b8261035f565b506060810180516020830151604090930151810167ffffffffffffffff908116909252161b60f01c90565b60008282850281610349576103496104c3565b04949350505050565b600061026b8260206103a5565b806060015167ffffffffffffffff166101001480156103815750602081015115155b61038a57600080fd5b60208082015160009081522060208201526000606090910152565b60006103b382610100610500565b156103bd57600080fd5b6000805b6101008110156103e45784811b91909118906103dd8482610514565b90506103c1565b509392505050565b60008060006060848603121561040157600080fd5b83359250602084013567ffffffffffffffff8116811461042057600080fd5b929592945050506040919091013590565b6020808252825182820181905260009190848201906040850190845b818110156104695783518352928401929184019160010161044d565b50909695505050505050565b6000806040838503121561048857600080fd5b50508035926020909101359150565b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052603260045260246000fd5b634e487b7160e01b600052601260045260246000fd5b600067ffffffffffffffff808416806104f4576104f46104c3565b92169190910692915050565b60008261050f5761050f6104c3565b500690565b8082018082111561026b57634e487b7160e01b600052601160045260246000fdfea26469706673582212200bbe1e270ad23d432db7a3600b432a86aedc119e755f7982b34503783537666f64736f6c63430008190033",
+  "bytecodeSha1": "bbc9f132523686f22eff70cb782a420788d2bd72",
   "compiler": {
     "evm_version": "istanbul",
     "optimizer": {
@@ -100,15 +1396,184 @@
   "contractName": "RandomGeneratorTest",
   "coverageMap": {
     "branches": {
+      "0": {
+        "Keccak256RG.init": {
+          "27": [
+            1157,
+            1177,
+            true
+          ]
+        },
+        "Keccak256RG.updateWeed": {
+          "30": [
+            1322,
+            1347,
+            false
+          ],
+          "31": [
+            1351,
+            1373,
+            true
+          ]
+        },
+        "Keccak256RG.yield16": {
+          "28": [
+            1561,
+            1580,
+            true
+          ],
+          "29": [
+            1619,
+            1644,
+            false
+          ]
+        }
+      },
       "1": {}
     },
     "statements": {
-      "1": {}
+      "0": {
+        "Keccak256RG.init": {
+          "6": [
+            1065,
+            1095
+          ],
+          "7": [
+            1105,
+            1139
+          ],
+          "8": [
+            1149,
+            1196
+          ],
+          "9": [
+            1206,
+            1231
+          ]
+        },
+        "Keccak256RG.updateWeed": {
+          "20": [
+            1314,
+            1374
+          ],
+          "21": [
+            1384,
+            1418
+          ],
+          "22": [
+            1428,
+            1450
+          ]
+        },
+        "Keccak256RG.yield10000": {
+          "10": [
+            1888,
+            1944
+          ]
+        },
+        "Keccak256RG.yield16": {
+          "14": [
+            1553,
+            1581
+          ],
+          "15": [
+            1646,
+            1661
+          ],
+          "16": [
+            1675,
+            1729
+          ],
+          "17": [
+            1743,
+            1778
+          ]
+        },
+        "LinearCongretureGenerator.init": {
+          "11": [
+            2236,
+            2281
+          ]
+        },
+        "LinearCongretureGenerator.yield10000": {
+          "12": [
+            2771,
+            2826
+          ],
+          "13": [
+            2846,
+            2893
+          ]
+        },
+        "reduceXOR": {
+          "23": [
+            239,
+            267
+          ],
+          "24": [
+            364,
+            388
+          ],
+          "25": [
+            331,
+            352
+          ],
+          "26": [
+            400,
+            410
+          ]
+        },
+        "reduceXOR32": {
+          "19": [
+            120,
+            154
+          ]
+        },
+        "scaling": {
+          "18": [
+            705,
+            744
+          ]
+        }
+      },
+      "1": {
+        "RandomGeneratorTest.runKrng": {
+          "0": [
+            381,
+            416
+          ],
+          "1": [
+            551,
+            585
+          ],
+          "2": [
+            532,
+            535
+          ]
+        },
+        "RandomGeneratorTest.runlcg": {
+          "3": [
+            714,
+            749
+          ],
+          "4": [
+            896,
+            930
+          ],
+          "5": [
+            877,
+            880
+          ]
+        }
+      }
     }
   },
-  "dependencies": [],
-  "deployedBytecode": "6080604052600080fdfea2646970667358221220f09abd6a9c8fb8ecdde02aea0f8973aa17640a54103ee6217235561de76d772964736f6c63430008190033",
-  "deployedSourceMap": "57:59:1:-:0;;;;;",
+  "dependencies": [
+    "Keccak256RG",
+    "LinearCongretureGenerator"
+  ],
+  "deployedBytecode": "608060405234801561001057600080fd5b50600436106100365760003560e01c8063c227888d1461003b578063ee00ac8914610064575b600080fd5b61004e6100493660046103ec565b610077565b60405161005b9190610431565b60405180910390f35b61004e610072366004610475565b610112565b60608167ffffffffffffffff81111561009257610092610497565b6040519080825280602002602001820160405280156100bb578160200160208202803683370190505b50905060006100ca85856101ab565b905060005b83811015610109576100e08261024d565b61ffff168382815181106100f6576100f66104ad565b60209081029190910101526001016100cf565b50509392505050565b60608167ffffffffffffffff81111561012d5761012d610497565b604051908082528060200260200182016040528015610156578160200160208202803683370190505b509050600061016484610271565b905060005b838110156101a35761017a82610293565b61ffff16838281518110610190576101906104ad565b6020908102919091010152600101610169565b505092915050565b604080516080810182526000808252602080830182815293830182905260608301829052858252808220808452825290209091526101eb826101006104d9565b67ffffffffffffffff16156102375760405162461bcd60e51b815260206004820152600e60248201526d6b726e67207969656c6453697a6560901b604482015260640160405180910390fd5b67ffffffffffffffff9091166040820152919050565b600061026b61025b836102ce565b61ffff1662010000612710610336565b92915050565b60408051602081019091526000815261028982610352565b60e01c8152919050565b600064010000000082600001516219660d02633c6ef35f01816102b8576102b86104c3565b0680835261026b90640100000000612710610336565b6000816040015167ffffffffffffffff166010146102eb57600080fd5b816060015167ffffffffffffffff166101000361030b5761030b8261035f565b506060810180516020830151604090930151810167ffffffffffffffff908116909252161b60f01c90565b60008282850281610349576103496104c3565b04949350505050565b600061026b8260206103a5565b806060015167ffffffffffffffff166101001480156103815750602081015115155b61038a57600080fd5b60208082015160009081522060208201526000606090910152565b60006103b382610100610500565b156103bd57600080fd5b6000805b6101008110156103e45784811b91909118906103dd8482610514565b90506103c1565b509392505050565b60008060006060848603121561040157600080fd5b83359250602084013567ffffffffffffffff8116811461042057600080fd5b929592945050506040919091013590565b6020808252825182820181905260009190848201906040850190845b818110156104695783518352928401929184019160010161044d565b50909695505050505050565b6000806040838503121561048857600080fd5b50508035926020909101359150565b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052603260045260246000fd5b634e487b7160e01b600052601260045260246000fd5b600067ffffffffffffffff808416806104f4576104f46104c3565b92169190910692915050565b60008261050f5761050f6104c3565b500690565b8082018082111561026b57634e487b7160e01b600052601160045260246000fdfea26469706673582212200bbe1e270ad23d432db7a3600b432a86aedc119e755f7982b34503783537666f64736f6c63430008190033",
+  "deployedSourceMap": "90:859:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;255:347;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;607:340;;;;;;:::i;:::-;;:::i;255:347::-;340:29;410:5;396:20;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;396:20:1;;381:35;;426:36;465:33;482:4;488:9;465:16;:33::i;:::-;426:72;;512:9;508:88;525:5;523:1;:7;508:88;;;569:16;:3;:14;:16::i;:::-;551:34;;:12;564:1;551:15;;;;;;;;:::i;:::-;;;;;;;;;;:34;532:3;;508:88;;;;371:231;255:347;;;;;:::o;607:340::-;673:29;743:5;729:20;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;729:20:1;;714:35;;759:45;807:36;838:4;807:30;:36::i;:::-;759:84;;857:9;853:88;870:5;868:1;:7;853:88;;;914:16;:3;:14;:16::i;:::-;896:34;;:12;909:1;896:15;;;;;;;;:::i;:::-;;;;;;;;;;:34;877:3;;853:88;;;;704:243;607:340;;;;:::o;960:278:0:-;-1:-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;500:18:0;;;535:21;;;1065:30;;;500:18;;535:21;;1105:34;;;1157:15;1163:9;1157:3;:15;:::i;:::-;:20;;;1149:47;;;;-1:-1:-1;;;1149:47:0;;2123:2:2;1149:47:0;;;2105:21:2;2162:2;2142:18;;;2135:30;-1:-1:-1;;;2181:18:2;;;2174:44;2235:18;;1149:47:0;;;;;;;;1206:25;;;;:13;;;:25;:3;960:278;-1:-1:-1;960:278:0:o;1801:150::-;1870:6;1902:41;1910:12;1918:3;1910:7;:12::i;:::-;1902:41;;812:7;1937:5;1902:7;:41::i;:::-;1888:56;1801:150;-1:-1:-1;;1801:150:0:o;2122:176::-;-1:-1:-1;;;;;;;;;;;;2255:25:0;2267:12;2255:11;:25::i;:::-;2248:33;;2236:45;;:3;2122:176;-1:-1:-1;2122:176:0:o;2665:235::-;2729:6;2021:7;2794:3;:9;;;2784:7;:19;2806:10;2784:32;2783:43;;;;;:::i;:::-;;2771:55;;;2860:32;;2021:7;2058:5;2860:7;:32::i;1463:332::-;1529:12;1561:3;:13;;;:19;;1578:2;1561:19;1553:28;;;;;;1619:3;:18;;;:25;;1641:3;1619:25;1615:46;;1646:15;1657:3;1646:10;:15::i;:::-;-1:-1:-1;1709:18:0;;;;;1697:8;;;;1765:13;;;;;1743:35;;1697:30;1743:35;;;;;;1697:30;;1683:46;;;1463:332::o;583:170::-;670:7;734:10;720:11;712:5;:19;:32;;;;;:::i;:::-;;;583:170;-1:-1:-1;;;;583:170:0:o;57:100::-;106:6;134:19;144:4;150:2;134:9;:19::i;1244:213::-;1322:3;:18;;;:25;;1344:3;1322:25;:51;;;;-1:-1:-1;1351:8:0;;;;:22;;1322:51;1314:60;;;;;;1409:8;;;;;466:7;500:18;;;535:21;1384:8;;;:34;1449:1;1428:18;;;;:22;1244:213::o;159:254::-;224:7;247:14;253:8;247:3;:14;:::i;:::-;:19;239:28;;;;;;273:11;295:17;290:105;326:3;314:9;:15;290:105;;;371:17;;;364:24;;;;;331:21;344:8;379:9;331:21;:::i;:::-;;;290:105;;;-1:-1:-1;407:3:0;159:254;-1:-1:-1;;;159:254:0:o;14:420:2:-;90:6;98;106;159:2;147:9;138:7;134:23;130:32;127:52;;;175:1;172;165:12;127:52;211:9;198:23;188:33;;271:2;260:9;256:18;243:32;315:18;308:5;304:30;297:5;294:41;284:69;;349:1;346;339:12;284:69;14:420;;372:5;;-1:-1:-1;;;424:2:2;409:18;;;;396:32;;14:420::o;439:632::-;610:2;662:21;;;732:13;;635:18;;;754:22;;;581:4;;610:2;833:15;;;;807:2;792:18;;;581:4;876:169;890:6;887:1;884:13;876:169;;;951:13;;939:26;;1020:15;;;;985:12;;;;912:1;905:9;876:169;;;-1:-1:-1;1062:3:2;;439:632;-1:-1:-1;;;;;;439:632:2:o;1076:248::-;1144:6;1152;1205:2;1193:9;1184:7;1180:23;1176:32;1173:52;;;1221:1;1218;1211:12;1173:52;-1:-1:-1;;1244:23:2;;;1314:2;1299:18;;;1286:32;;-1:-1:-1;1076:248:2:o;1329:127::-;1390:10;1385:3;1381:20;1378:1;1371:31;1421:4;1418:1;1411:15;1445:4;1442:1;1435:15;1461:127;1522:10;1517:3;1513:20;1510:1;1503:31;1553:4;1550:1;1543:15;1577:4;1574:1;1567:15;1593:127;1654:10;1649:3;1645:20;1642:1;1635:31;1685:4;1682:1;1675:15;1709:4;1706:1;1699:15;1725:191;1756:1;1782:18;1827:2;1824:1;1820:10;1849:3;1839:37;;1856:18;;:::i;:::-;1894:10;;1890:20;;;;;1725:191;-1:-1:-1;;1725:191:2:o;2264:112::-;2296:1;2322;2312:35;;2327:18;;:::i;:::-;-1:-1:-1;2361:9:2;;2264:112::o;2381:222::-;2446:9;;;2467:10;;;2464:133;;;2519:10;2514:3;2510:20;2507:1;2500:31;2554:4;2551:1;2544:15;2582:4;2579:1;2572:15",
   "language": "Solidity",
   "natspec": {
     "kind": "dev",
@@ -116,15 +1581,15 @@
     "version": 1
   },
   "offset": [
-    57,
-    116
+    90,
+    949
   ],
-  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 CREATE SWAP11 0xBD PUSH11 0x9C8FB8ECDDE02AEA0F8973 0xAA OR PUSH5 0xA54103EE6 0x21 PUSH19 0x35561DE76D772964736F6C6343000819003300 ",
+  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0xC227888D EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0xEE00AC89 EQ PUSH2 0x64 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4E PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0x3EC JUMP JUMPDEST PUSH2 0x77 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH2 0x5B SWAP2 SWAP1 PUSH2 0x431 JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH2 0x4E PUSH2 0x72 CALLDATASIZE PUSH1 0x4 PUSH2 0x475 JUMP JUMPDEST PUSH2 0x112 JUMP JUMPDEST PUSH1 0x60 DUP2 PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x92 JUMPI PUSH2 0x92 PUSH2 0x497 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP1 DUP3 MSTORE DUP1 PUSH1 0x20 MUL PUSH1 0x20 ADD DUP3 ADD PUSH1 0x40 MSTORE DUP1 ISZERO PUSH2 0xBB JUMPI DUP2 PUSH1 0x20 ADD PUSH1 0x20 DUP3 MUL DUP1 CALLDATASIZE DUP4 CALLDATACOPY ADD SWAP1 POP JUMPDEST POP SWAP1 POP PUSH1 0x0 PUSH2 0xCA DUP6 DUP6 PUSH2 0x1AB JUMP JUMPDEST SWAP1 POP PUSH1 0x0 JUMPDEST DUP4 DUP2 LT ISZERO PUSH2 0x109 JUMPI PUSH2 0xE0 DUP3 PUSH2 0x24D JUMP JUMPDEST PUSH2 0xFFFF AND DUP4 DUP3 DUP2 MLOAD DUP2 LT PUSH2 0xF6 JUMPI PUSH2 0xF6 PUSH2 0x4AD JUMP JUMPDEST PUSH1 0x20 SWAP1 DUP2 MUL SWAP2 SWAP1 SWAP2 ADD ADD MSTORE PUSH1 0x1 ADD PUSH2 0xCF JUMP JUMPDEST POP POP SWAP4 SWAP3 POP POP POP JUMP JUMPDEST PUSH1 0x60 DUP2 PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x12D JUMPI PUSH2 0x12D PUSH2 0x497 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP1 DUP3 MSTORE DUP1 PUSH1 0x20 MUL PUSH1 0x20 ADD DUP3 ADD PUSH1 0x40 MSTORE DUP1 ISZERO PUSH2 0x156 JUMPI DUP2 PUSH1 0x20 ADD PUSH1 0x20 DUP3 MUL DUP1 CALLDATASIZE DUP4 CALLDATACOPY ADD SWAP1 POP JUMPDEST POP SWAP1 POP PUSH1 0x0 PUSH2 0x164 DUP5 PUSH2 0x271 JUMP JUMPDEST SWAP1 POP PUSH1 0x0 JUMPDEST DUP4 DUP2 LT ISZERO PUSH2 0x1A3 JUMPI PUSH2 0x17A DUP3 PUSH2 0x293 JUMP JUMPDEST PUSH2 0xFFFF AND DUP4 DUP3 DUP2 MLOAD DUP2 LT PUSH2 0x190 JUMPI PUSH2 0x190 PUSH2 0x4AD JUMP JUMPDEST PUSH1 0x20 SWAP1 DUP2 MUL SWAP2 SWAP1 SWAP2 ADD ADD MSTORE PUSH1 0x1 ADD PUSH2 0x169 JUMP JUMPDEST POP POP SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD PUSH1 0x80 DUP2 ADD DUP3 MSTORE PUSH1 0x0 DUP1 DUP3 MSTORE PUSH1 0x20 DUP1 DUP4 ADD DUP3 DUP2 MSTORE SWAP4 DUP4 ADD DUP3 SWAP1 MSTORE PUSH1 0x60 DUP4 ADD DUP3 SWAP1 MSTORE DUP6 DUP3 MSTORE DUP1 DUP3 KECCAK256 DUP1 DUP5 MSTORE DUP3 MSTORE SWAP1 KECCAK256 SWAP1 SWAP2 MSTORE PUSH2 0x1EB DUP3 PUSH2 0x100 PUSH2 0x4D9 JUMP JUMPDEST PUSH8 0xFFFFFFFFFFFFFFFF AND ISZERO PUSH2 0x237 JUMPI PUSH1 0x40 MLOAD PUSH3 0x461BCD PUSH1 0xE5 SHL DUP2 MSTORE PUSH1 0x20 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0xE PUSH1 0x24 DUP3 ADD MSTORE PUSH14 0x6B726E67207969656C6453697A65 PUSH1 0x90 SHL PUSH1 0x44 DUP3 ADD MSTORE PUSH1 0x64 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 REVERT JUMPDEST PUSH8 0xFFFFFFFFFFFFFFFF SWAP1 SWAP2 AND PUSH1 0x40 DUP3 ADD MSTORE SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 PUSH2 0x26B PUSH2 0x25B DUP4 PUSH2 0x2CE JUMP JUMPDEST PUSH2 0xFFFF AND PUSH3 0x10000 PUSH2 0x2710 PUSH2 0x336 JUMP JUMPDEST SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD PUSH1 0x20 DUP2 ADD SWAP1 SWAP2 MSTORE PUSH1 0x0 DUP2 MSTORE PUSH2 0x289 DUP3 PUSH2 0x352 JUMP JUMPDEST PUSH1 0xE0 SHR DUP2 MSTORE SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 PUSH5 0x100000000 DUP3 PUSH1 0x0 ADD MLOAD PUSH3 0x19660D MUL PUSH4 0x3C6EF35F ADD DUP2 PUSH2 0x2B8 JUMPI PUSH2 0x2B8 PUSH2 0x4C3 JUMP JUMPDEST MOD DUP1 DUP4 MSTORE PUSH2 0x26B SWAP1 PUSH5 0x100000000 PUSH2 0x2710 PUSH2 0x336 JUMP JUMPDEST PUSH1 0x0 DUP2 PUSH1 0x40 ADD MLOAD PUSH8 0xFFFFFFFFFFFFFFFF AND PUSH1 0x10 EQ PUSH2 0x2EB JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 PUSH1 0x60 ADD MLOAD PUSH8 0xFFFFFFFFFFFFFFFF AND PUSH2 0x100 SUB PUSH2 0x30B JUMPI PUSH2 0x30B DUP3 PUSH2 0x35F JUMP JUMPDEST POP PUSH1 0x60 DUP2 ADD DUP1 MLOAD PUSH1 0x20 DUP4 ADD MLOAD PUSH1 0x40 SWAP1 SWAP4 ADD MLOAD DUP2 ADD PUSH8 0xFFFFFFFFFFFFFFFF SWAP1 DUP2 AND SWAP1 SWAP3 MSTORE AND SHL PUSH1 0xF0 SHR SWAP1 JUMP JUMPDEST PUSH1 0x0 DUP3 DUP3 DUP6 MUL DUP2 PUSH2 0x349 JUMPI PUSH2 0x349 PUSH2 0x4C3 JUMP JUMPDEST DIV SWAP5 SWAP4 POP POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH2 0x26B DUP3 PUSH1 0x20 PUSH2 0x3A5 JUMP JUMPDEST DUP1 PUSH1 0x60 ADD MLOAD PUSH8 0xFFFFFFFFFFFFFFFF AND PUSH2 0x100 EQ DUP1 ISZERO PUSH2 0x381 JUMPI POP PUSH1 0x20 DUP2 ADD MLOAD ISZERO ISZERO JUMPDEST PUSH2 0x38A JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x20 DUP1 DUP3 ADD MLOAD PUSH1 0x0 SWAP1 DUP2 MSTORE KECCAK256 PUSH1 0x20 DUP3 ADD MSTORE PUSH1 0x0 PUSH1 0x60 SWAP1 SWAP2 ADD MSTORE JUMP JUMPDEST PUSH1 0x0 PUSH2 0x3B3 DUP3 PUSH2 0x100 PUSH2 0x500 JUMP JUMPDEST ISZERO PUSH2 0x3BD JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x0 DUP1 JUMPDEST PUSH2 0x100 DUP2 LT ISZERO PUSH2 0x3E4 JUMPI DUP5 DUP2 SHL SWAP2 SWAP1 SWAP2 XOR SWAP1 PUSH2 0x3DD DUP5 DUP3 PUSH2 0x514 JUMP JUMPDEST SWAP1 POP PUSH2 0x3C1 JUMP JUMPDEST POP SWAP4 SWAP3 POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x0 PUSH1 0x60 DUP5 DUP7 SUB SLT ISZERO PUSH2 0x401 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP4 CALLDATALOAD SWAP3 POP PUSH1 0x20 DUP5 ADD CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP2 AND DUP2 EQ PUSH2 0x420 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP3 SWAP6 SWAP3 SWAP5 POP POP POP PUSH1 0x40 SWAP2 SWAP1 SWAP2 ADD CALLDATALOAD SWAP1 JUMP JUMPDEST PUSH1 0x20 DUP1 DUP3 MSTORE DUP3 MLOAD DUP3 DUP3 ADD DUP2 SWAP1 MSTORE PUSH1 0x0 SWAP2 SWAP1 DUP5 DUP3 ADD SWAP1 PUSH1 0x40 DUP6 ADD SWAP1 DUP5 JUMPDEST DUP2 DUP2 LT ISZERO PUSH2 0x469 JUMPI DUP4 MLOAD DUP4 MSTORE SWAP3 DUP5 ADD SWAP3 SWAP2 DUP5 ADD SWAP2 PUSH1 0x1 ADD PUSH2 0x44D JUMP JUMPDEST POP SWAP1 SWAP7 SWAP6 POP POP POP POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x488 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP POP DUP1 CALLDATALOAD SWAP3 PUSH1 0x20 SWAP1 SWAP2 ADD CALLDATALOAD SWAP2 POP JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x32 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x12 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP5 AND DUP1 PUSH2 0x4F4 JUMPI PUSH2 0x4F4 PUSH2 0x4C3 JUMP JUMPDEST SWAP3 AND SWAP2 SWAP1 SWAP2 MOD SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x0 DUP3 PUSH2 0x50F JUMPI PUSH2 0x50F PUSH2 0x4C3 JUMP JUMPDEST POP MOD SWAP1 JUMP JUMPDEST DUP1 DUP3 ADD DUP1 DUP3 GT ISZERO PUSH2 0x26B JUMPI PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x11 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 SIGNEXTEND 0xBE 0x1E 0x27 EXP 0xD2 RETURNDATASIZE NUMBER 0x2D 0xB7 LOG3 PUSH1 0xB NUMBER 0x2A DUP7 0xAE 0xDC GT SWAP15 PUSH22 0x5F7982B34503783537666F64736F6C63430008190033 ",
   "pcMap": {
     "0": {
       "offset": [
-        57,
-        116
+        90,
+        949
       ],
       "op": "PUSH1",
       "path": "1",
@@ -133,8 +1598,8 @@
     "2": {
       "fn": null,
       "offset": [
-        57,
-        116
+        90,
+        949
       ],
       "op": "PUSH1",
       "path": "1",
@@ -143,8 +1608,8 @@
     "4": {
       "fn": null,
       "offset": [
-        57,
-        116
+        90,
+        949
       ],
       "op": "MSTORE",
       "path": "1"
@@ -152,35 +1617,6387 @@
     "5": {
       "fn": null,
       "offset": [
-        57,
-        116
+        90,
+        949
       ],
-      "op": "PUSH1",
-      "path": "1",
-      "value": "0x0"
+      "op": "CALLVALUE",
+      "path": "1"
+    },
+    "6": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "DUP1",
+      "path": "1"
     },
     "7": {
       "fn": null,
       "offset": [
-        57,
-        116
+        90,
+        949
       ],
-      "op": "DUP1",
+      "op": "ISZERO",
       "path": "1"
     },
     "8": {
       "fn": null,
       "offset": [
-        57,
-        116
+        90,
+        949
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x10"
+    },
+    "11": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "12": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "14": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "15": {
+      "dev": "Cannot send ether to nonpayable function",
+      "fn": null,
+      "offset": [
+        90,
+        949
       ],
       "op": "REVERT",
       "path": "1"
+    },
+    "16": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "17": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "18": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x4"
+    },
+    "20": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "CALLDATASIZE",
+      "path": "1"
+    },
+    "21": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "LT",
+      "path": "1"
+    },
+    "22": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x36"
+    },
+    "25": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "26": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "28": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "CALLDATALOAD",
+      "path": "1"
+    },
+    "29": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0xE0"
+    },
+    "31": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "SHR",
+      "path": "1"
+    },
+    "32": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "33": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH4",
+      "path": "1",
+      "value": "0xC227888D"
+    },
+    "38": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "EQ",
+      "path": "1"
+    },
+    "39": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x3B"
+    },
+    "42": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "43": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "44": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH4",
+      "path": "1",
+      "value": "0xEE00AC89"
+    },
+    "49": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "EQ",
+      "path": "1"
+    },
+    "50": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x64"
+    },
+    "53": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "54": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "55": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "57": {
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "58": {
+      "first_revert": true,
+      "fn": null,
+      "offset": [
+        90,
+        949
+      ],
+      "op": "REVERT",
+      "path": "1"
+    },
+    "59": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "60": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x4E"
+    },
+    "63": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x49"
+    },
+    "66": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "CALLDATASIZE",
+      "path": "1"
+    },
+    "67": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x4"
+    },
+    "69": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x3EC"
+    },
+    "72": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "73": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "74": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x77"
+    },
+    "77": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "78": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "79": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "81": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "82": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x5B"
+    },
+    "85": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "86": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "87": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x431"
+    },
+    "90": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "91": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "92": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "94": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "95": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "96": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "97": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SUB",
+      "path": "1"
+    },
+    "98": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "99": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "RETURN",
+      "path": "1"
+    },
+    "100": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "101": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x4E"
+    },
+    "104": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x72"
+    },
+    "107": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "CALLDATASIZE",
+      "path": "1"
+    },
+    "108": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x4"
+    },
+    "110": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x475"
+    },
+    "113": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "114": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "115": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x112"
+    },
+    "118": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "119": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "120": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        340,
+        369
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x60"
+    },
+    "122": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        410,
+        415
+      ],
+      "op": "DUP2",
+      "path": "1",
+      "statement": 0
+    },
+    "123": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH8",
+      "path": "1",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "132": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "133": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "GT",
+      "path": "1"
+    },
+    "134": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "135": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x92"
+    },
+    "138": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "139": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x92"
+    },
+    "142": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x497"
+    },
+    "145": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "146": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "147": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "149": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "150": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "151": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "152": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "153": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "154": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "155": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "157": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "158": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "160": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "161": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "162": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "163": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "165": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "166": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "167": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "168": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xBB"
+    },
+    "171": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "172": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "173": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "175": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "176": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "178": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "179": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "180": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "181": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "CALLDATASIZE",
+      "path": "1"
+    },
+    "182": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "183": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "CALLDATACOPY",
+      "path": "1"
+    },
+    "184": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "185": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "186": {
+      "op": "POP"
+    },
+    "187": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "188": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        396,
+        416
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "189": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        381,
+        416
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "190": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        381,
+        416
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "191": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        426,
+        462
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "193": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        465,
+        498
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xCA"
+    },
+    "196": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        482,
+        486
+      ],
+      "op": "DUP6",
+      "path": "1"
+    },
+    "197": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        488,
+        497
+      ],
+      "op": "DUP6",
+      "path": "1"
+    },
+    "198": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        465,
+        481
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x1AB"
+    },
+    "201": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        465,
+        498
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "202": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        465,
+        498
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "203": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        426,
+        498
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "204": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        426,
+        498
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "205": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        512,
+        521
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "207": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "208": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        525,
+        530
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "209": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        523,
+        524
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "210": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        523,
+        530
+      ],
+      "op": "LT",
+      "path": "1"
+    },
+    "211": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "212": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x109"
+    },
+    "215": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "216": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        569,
+        585
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "statement": 1,
+      "value": "0xE0"
+    },
+    "219": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        569,
+        572
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "220": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        569,
+        583
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x24D"
+    },
+    "223": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        569,
+        585
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "224": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        569,
+        585
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "225": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        585
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xFFFF"
+    },
+    "228": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        585
+      ],
+      "op": "AND",
+      "path": "1"
+    },
+    "229": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        563
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "230": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        564,
+        565
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "231": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "232": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "233": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "234": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "LT",
+      "path": "1"
+    },
+    "235": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xF6"
+    },
+    "238": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "239": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xF6"
+    },
+    "242": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x4AD"
+    },
+    "245": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "i",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "246": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "247": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "249": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "250": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "251": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "252": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "253": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "254": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "255": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "256": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        566
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "257": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        551,
+        585
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "258": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        532,
+        535
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "statement": 2,
+      "value": "0x1"
+    },
+    "260": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        532,
+        535
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "261": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xCF"
+    },
+    "264": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "265": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "266": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        508,
+        596
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "267": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        371,
+        602
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "268": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP4",
+      "path": "1"
+    },
+    "269": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "SWAP3",
+      "path": "1"
+    },
+    "270": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "271": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "272": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "273": {
+      "fn": "RandomGeneratorTest.runKrng",
+      "jump": "o",
+      "offset": [
+        255,
+        602
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "274": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "275": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        673,
+        702
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x60"
+    },
+    "277": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        743,
+        748
+      ],
+      "op": "DUP2",
+      "path": "1",
+      "statement": 3
+    },
+    "278": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH8",
+      "path": "1",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "287": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "288": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "GT",
+      "path": "1"
+    },
+    "289": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "290": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x12D"
+    },
+    "293": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "294": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x12D"
+    },
+    "297": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x497"
+    },
+    "300": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "301": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "302": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "304": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "305": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "306": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "307": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "308": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "309": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "310": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "312": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "313": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "315": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "316": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "317": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "318": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x40"
+    },
+    "320": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "321": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "322": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "323": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x156"
+    },
+    "326": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "327": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "328": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "330": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "331": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "333": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "334": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "335": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP1",
+      "path": "1"
+    },
+    "336": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "CALLDATASIZE",
+      "path": "1"
+    },
+    "337": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "338": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "CALLDATACOPY",
+      "path": "1"
+    },
+    "339": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "340": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "341": {
+      "op": "POP"
+    },
+    "342": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "343": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        729,
+        749
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "344": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        714,
+        749
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "345": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        714,
+        749
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "346": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        759,
+        804
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "348": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        807,
+        843
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x164"
+    },
+    "351": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        838,
+        842
+      ],
+      "op": "DUP5",
+      "path": "1"
+    },
+    "352": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        807,
+        837
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x271"
+    },
+    "355": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        807,
+        843
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "356": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        807,
+        843
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "357": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        759,
+        843
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "358": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        759,
+        843
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "359": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        857,
+        866
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x0"
+    },
+    "361": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "362": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        870,
+        875
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "363": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        868,
+        869
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "364": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        868,
+        875
+      ],
+      "op": "LT",
+      "path": "1"
+    },
+    "365": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "ISZERO",
+      "path": "1"
+    },
+    "366": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x1A3"
+    },
+    "369": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "370": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        914,
+        930
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "statement": 4,
+      "value": "0x17A"
+    },
+    "373": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        914,
+        917
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "374": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        914,
+        928
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x293"
+    },
+    "377": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        914,
+        930
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "378": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        914,
+        930
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "379": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        930
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0xFFFF"
+    },
+    "382": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        930
+      ],
+      "op": "AND",
+      "path": "1"
+    },
+    "383": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        908
+      ],
+      "op": "DUP4",
+      "path": "1"
+    },
+    "384": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        909,
+        910
+      ],
+      "op": "DUP3",
+      "path": "1"
+    },
+    "385": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "386": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "MLOAD",
+      "path": "1"
+    },
+    "387": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "388": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "LT",
+      "path": "1"
+    },
+    "389": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x190"
+    },
+    "392": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "JUMPI",
+      "path": "1"
+    },
+    "393": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x190"
+    },
+    "396": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x4AD"
+    },
+    "399": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "i",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "400": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "401": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "value": "0x20"
+    },
+    "403": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "404": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "DUP2",
+      "path": "1"
+    },
+    "405": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "MUL",
+      "path": "1"
+    },
+    "406": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "407": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "SWAP1",
+      "path": "1"
+    },
+    "408": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "409": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "410": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        911
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "411": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        896,
+        930
+      ],
+      "op": "MSTORE",
+      "path": "1"
+    },
+    "412": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        877,
+        880
+      ],
+      "op": "PUSH1",
+      "path": "1",
+      "statement": 5,
+      "value": "0x1"
+    },
+    "414": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        877,
+        880
+      ],
+      "op": "ADD",
+      "path": "1"
+    },
+    "415": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "PUSH2",
+      "path": "1",
+      "value": "0x169"
+    },
+    "418": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "419": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "JUMPDEST",
+      "path": "1"
+    },
+    "420": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        853,
+        941
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "421": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        704,
+        947
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "422": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "SWAP3",
+      "path": "1"
+    },
+    "423": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "SWAP2",
+      "path": "1"
+    },
+    "424": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "425": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "POP",
+      "path": "1"
+    },
+    "426": {
+      "fn": "RandomGeneratorTest.runlcg",
+      "jump": "o",
+      "offset": [
+        607,
+        947
+      ],
+      "op": "JUMP",
+      "path": "1"
+    },
+    "427": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        960,
+        1238
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "428": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "430": {
+      "op": "DUP1"
+    },
+    "431": {
+      "op": "MLOAD"
+    },
+    "432": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "434": {
+      "op": "DUP2"
+    },
+    "435": {
+      "op": "ADD"
+    },
+    "436": {
+      "op": "DUP3"
+    },
+    "437": {
+      "op": "MSTORE"
+    },
+    "438": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "440": {
+      "op": "DUP1"
+    },
+    "441": {
+      "op": "DUP3"
+    },
+    "442": {
+      "op": "MSTORE"
+    },
+    "443": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "445": {
+      "op": "DUP1"
+    },
+    "446": {
+      "op": "DUP4"
+    },
+    "447": {
+      "op": "ADD"
+    },
+    "448": {
+      "op": "DUP3"
+    },
+    "449": {
+      "op": "DUP2"
+    },
+    "450": {
+      "op": "MSTORE"
+    },
+    "451": {
+      "op": "SWAP4"
+    },
+    "452": {
+      "op": "DUP4"
+    },
+    "453": {
+      "op": "ADD"
+    },
+    "454": {
+      "op": "DUP3"
+    },
+    "455": {
+      "op": "SWAP1"
+    },
+    "456": {
+      "op": "MSTORE"
+    },
+    "457": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "459": {
+      "op": "DUP4"
+    },
+    "460": {
+      "op": "ADD"
+    },
+    "461": {
+      "op": "DUP3"
+    },
+    "462": {
+      "op": "SWAP1"
+    },
+    "463": {
+      "op": "MSTORE"
+    },
+    "464": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "DUP6",
+      "path": "0"
+    },
+    "465": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "466": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "467": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "468": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "469": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "KECCAK256",
+      "path": "0"
+    },
+    "470": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1065,
+        1095
+      ],
+      "op": "DUP1",
+      "path": "0",
+      "statement": 6
+    },
+    "471": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1065,
+        1095
+      ],
+      "op": "DUP5",
+      "path": "0"
+    },
+    "472": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1065,
+        1095
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "473": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "474": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "475": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "476": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "KECCAK256",
+      "path": "0"
+    },
+    "477": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1105,
+        1139
+      ],
+      "op": "SWAP1",
+      "path": "0",
+      "statement": 7
+    },
+    "478": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1105,
+        1139
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "479": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1105,
+        1139
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "480": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1172
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 8,
+      "value": "0x1EB"
+    },
+    "483": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1163,
+        1172
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "484": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1160
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x100"
+    },
+    "487": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1172
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x4D9"
+    },
+    "490": {
+      "fn": "Keccak256RG.init",
+      "jump": "i",
+      "offset": [
+        1157,
+        1172
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "491": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1172
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "492": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1177
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "501": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1177
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "502": {
+      "branch": 27,
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1157,
+        1177
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "503": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x237"
+    },
+    "506": {
+      "branch": 27,
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "507": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "509": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "510": {
+      "op": "PUSH3",
+      "value": "0x461BCD"
+    },
+    "514": {
+      "op": "PUSH1",
+      "value": "0xE5"
+    },
+    "516": {
+      "op": "SHL"
+    },
+    "517": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "518": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "519": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "521": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x4"
+    },
+    "523": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "524": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "525": {
+      "op": "MSTORE"
+    },
+    "526": {
+      "op": "PUSH1",
+      "value": "0xE"
+    },
+    "528": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "530": {
+      "op": "DUP3"
+    },
+    "531": {
+      "op": "ADD"
+    },
+    "532": {
+      "op": "MSTORE"
+    },
+    "533": {
+      "op": "PUSH14",
+      "value": "0x6B726E67207969656C6453697A65"
+    },
+    "548": {
+      "op": "PUSH1",
+      "value": "0x90"
+    },
+    "550": {
+      "op": "SHL"
+    },
+    "551": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "553": {
+      "op": "DUP3"
+    },
+    "554": {
+      "op": "ADD"
+    },
+    "555": {
+      "op": "MSTORE"
+    },
+    "556": {
+      "op": "PUSH1",
+      "value": "0x64"
+    },
+    "558": {
+      "op": "ADD"
+    },
+    "559": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "561": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "562": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "563": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "564": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "SUB",
+      "path": "0"
+    },
+    "565": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "566": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "REVERT",
+      "optimizer_revert": true,
+      "path": "0"
+    },
+    "567": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1149,
+        1196
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "568": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1231
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "statement": 9,
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "577": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1231
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "578": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1231
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "579": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1231
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "580": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1219
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "582": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1219
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "583": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1219
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "584": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1231
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "585": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        1206,
+        1209
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "586": {
+      "fn": "Keccak256RG.init",
+      "offset": [
+        960,
+        1238
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "587": {
+      "op": "POP"
+    },
+    "588": {
+      "fn": "Keccak256RG.init",
+      "jump": "o",
+      "offset": [
+        960,
+        1238
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "589": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1801,
+        1951
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "590": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1870,
+        1876
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "592": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1902,
+        1943
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 10,
+      "value": "0x26B"
+    },
+    "595": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1910,
+        1922
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x25B"
+    },
+    "598": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1918,
+        1921
+      ],
+      "op": "DUP4",
+      "path": "0"
+    },
+    "599": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1910,
+        1917
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2CE"
+    },
+    "602": {
+      "fn": "Keccak256RG.yield10000",
+      "jump": "i",
+      "offset": [
+        1910,
+        1922
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "603": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1910,
+        1922
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "604": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1902,
+        1943
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0xFFFF"
+    },
+    "607": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1902,
+        1943
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "608": {
+      "offset": [
+        812,
+        819
+      ],
+      "op": "PUSH3",
+      "path": "0",
+      "value": "0x10000"
+    },
+    "612": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1937,
+        1942
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2710"
+    },
+    "615": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1902,
+        1909
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x336"
+    },
+    "618": {
+      "fn": "Keccak256RG.yield10000",
+      "jump": "i",
+      "offset": [
+        1902,
+        1943
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "619": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1902,
+        1943
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "620": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1888,
+        1944
+      ],
+      "op": "SWAP3",
+      "path": "0"
+    },
+    "621": {
+      "fn": "Keccak256RG.yield10000",
+      "offset": [
+        1801,
+        1951
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "622": {
+      "op": "POP"
+    },
+    "623": {
+      "op": "POP"
+    },
+    "624": {
+      "fn": "Keccak256RG.yield10000",
+      "jump": "o",
+      "offset": [
+        1801,
+        1951
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "625": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2122,
+        2298
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "626": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "628": {
+      "op": "DUP1"
+    },
+    "629": {
+      "op": "MLOAD"
+    },
+    "630": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "632": {
+      "op": "DUP2"
+    },
+    "633": {
+      "op": "ADD"
+    },
+    "634": {
+      "op": "SWAP1"
+    },
+    "635": {
+      "op": "SWAP2"
+    },
+    "636": {
+      "op": "MSTORE"
+    },
+    "637": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "639": {
+      "op": "DUP2"
+    },
+    "640": {
+      "op": "MSTORE"
+    },
+    "641": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2255,
+        2280
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 11,
+      "value": "0x289"
+    },
+    "644": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2267,
+        2279
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "645": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2255,
+        2266
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x352"
+    },
+    "648": {
+      "fn": "LinearCongretureGenerator.init",
+      "jump": "i",
+      "offset": [
+        2255,
+        2280
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "649": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2255,
+        2280
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "650": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2248,
+        2281
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0xE0"
+    },
+    "652": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2248,
+        2281
+      ],
+      "op": "SHR",
+      "path": "0"
+    },
+    "653": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2236,
+        2281
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "654": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2236,
+        2281
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "655": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2236,
+        2239
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "656": {
+      "fn": "LinearCongretureGenerator.init",
+      "offset": [
+        2122,
+        2298
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "657": {
+      "op": "POP"
+    },
+    "658": {
+      "fn": "LinearCongretureGenerator.init",
+      "jump": "o",
+      "offset": [
+        2122,
+        2298
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "659": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2665,
+        2900
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "660": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2729,
+        2735
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "662": {
+      "offset": [
+        2021,
+        2028
+      ],
+      "op": "PUSH5",
+      "path": "0",
+      "value": "0x100000000"
+    },
+    "668": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2794,
+        2797
+      ],
+      "op": "DUP3",
+      "path": "0",
+      "statement": 12
+    },
+    "669": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2794,
+        2803
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "671": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2794,
+        2803
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "672": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2794,
+        2803
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "673": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2784,
+        2791
+      ],
+      "op": "PUSH3",
+      "path": "0",
+      "value": "0x19660D"
+    },
+    "677": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2784,
+        2803
+      ],
+      "op": "MUL",
+      "path": "0"
+    },
+    "678": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2806,
+        2816
+      ],
+      "op": "PUSH4",
+      "path": "0",
+      "value": "0x3C6EF35F"
+    },
+    "683": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2784,
+        2816
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "684": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "685": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2B8"
+    },
+    "688": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "689": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2B8"
+    },
+    "692": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x4C3"
+    },
+    "695": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "jump": "i",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "696": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "697": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2783,
+        2826
+      ],
+      "op": "MOD",
+      "path": "0"
+    },
+    "698": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2771,
+        2826
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "699": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2771,
+        2826
+      ],
+      "op": "DUP4",
+      "path": "0"
+    },
+    "700": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2771,
+        2826
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "701": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2860,
+        2892
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 13,
+      "value": "0x26B"
+    },
+    "704": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2860,
+        2892
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "705": {
+      "offset": [
+        2021,
+        2028
+      ],
+      "op": "PUSH5",
+      "path": "0",
+      "value": "0x100000000"
+    },
+    "711": {
+      "offset": [
+        2058,
+        2063
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2710"
+    },
+    "714": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "offset": [
+        2860,
+        2867
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x336"
+    },
+    "717": {
+      "fn": "LinearCongretureGenerator.yield10000",
+      "jump": "i",
+      "offset": [
+        2860,
+        2892
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "718": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1463,
+        1795
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "719": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1529,
+        1541
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "721": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1564
+      ],
+      "op": "DUP2",
+      "path": "0",
+      "statement": 14
+    },
+    "722": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1574
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "724": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1574
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "725": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1574
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "726": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1580
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "735": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1580
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "736": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1578,
+        1580
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x10"
+    },
+    "738": {
+      "branch": 28,
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1561,
+        1580
+      ],
+      "op": "EQ",
+      "path": "0"
+    },
+    "739": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2EB"
+    },
+    "742": {
+      "branch": 28,
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "743": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "745": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "746": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "REVERT",
+      "path": "0"
+    },
+    "747": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1553,
+        1581
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "748": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1622
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "749": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1637
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x60"
+    },
+    "751": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1637
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "752": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1637
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "753": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1644
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "762": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1644
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "763": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1641,
+        1644
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x100"
+    },
+    "766": {
+      "branch": 29,
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1619,
+        1644
+      ],
+      "op": "SUB",
+      "path": "0"
+    },
+    "767": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1615,
+        1661
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x30B"
+    },
+    "770": {
+      "branch": 29,
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1615,
+        1661
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "771": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1646,
+        1661
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 15,
+      "value": "0x30B"
+    },
+    "774": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1657,
+        1660
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "775": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1646,
+        1656
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x35F"
+    },
+    "778": {
+      "fn": "Keccak256RG.yield16",
+      "jump": "i",
+      "offset": [
+        1646,
+        1661
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "779": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1646,
+        1661
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "780": {
+      "op": "POP"
+    },
+    "781": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1709,
+        1727
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 16,
+      "value": "0x60"
+    },
+    "783": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1709,
+        1727
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "784": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1709,
+        1727
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "785": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1709,
+        1727
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "786": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1709,
+        1727
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "787": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1705
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "789": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1705
+      ],
+      "op": "DUP4",
+      "path": "0"
+    },
+    "790": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1705
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "791": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1705
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "792": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1765,
+        1778
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 17,
+      "value": "0x40"
+    },
+    "794": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1765,
+        1778
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "795": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1765,
+        1778
+      ],
+      "op": "SWAP4",
+      "path": "0"
+    },
+    "796": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1765,
+        1778
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "797": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1765,
+        1778
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "798": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "799": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "800": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1727
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "809": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "810": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "811": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "812": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "813": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "SWAP3",
+      "path": "0"
+    },
+    "814": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1743,
+        1778
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "815": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1727
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "816": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1697,
+        1727
+      ],
+      "op": "SHL",
+      "path": "0"
+    },
+    "817": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1683,
+        1729
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0xF0"
+    },
+    "819": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1683,
+        1729
+      ],
+      "op": "SHR",
+      "path": "0"
+    },
+    "820": {
+      "fn": "Keccak256RG.yield16",
+      "offset": [
+        1683,
+        1729
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "821": {
+      "fn": "Keccak256RG.yield16",
+      "jump": "o",
+      "offset": [
+        1463,
+        1795
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "822": {
+      "fn": "scaling",
+      "offset": [
+        583,
+        753
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "823": {
+      "fn": "scaling",
+      "offset": [
+        670,
+        677
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "825": {
+      "fn": "scaling",
+      "offset": [
+        734,
+        744
+      ],
+      "op": "DUP3",
+      "path": "0",
+      "statement": 18
+    },
+    "826": {
+      "fn": "scaling",
+      "offset": [
+        720,
+        731
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "827": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        717
+      ],
+      "op": "DUP6",
+      "path": "0"
+    },
+    "828": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        731
+      ],
+      "op": "MUL",
+      "path": "0"
+    },
+    "829": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "830": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x349"
+    },
+    "833": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "834": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x349"
+    },
+    "837": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x4C3"
+    },
+    "840": {
+      "fn": "scaling",
+      "jump": "i",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "841": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "842": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "DIV",
+      "path": "0"
+    },
+    "843": {
+      "fn": "scaling",
+      "offset": [
+        712,
+        744
+      ],
+      "op": "SWAP5",
+      "path": "0"
+    },
+    "844": {
+      "fn": "scaling",
+      "offset": [
+        583,
+        753
+      ],
+      "op": "SWAP4",
+      "path": "0"
+    },
+    "845": {
+      "op": "POP"
+    },
+    "846": {
+      "op": "POP"
+    },
+    "847": {
+      "op": "POP"
+    },
+    "848": {
+      "op": "POP"
+    },
+    "849": {
+      "fn": "scaling",
+      "jump": "o",
+      "offset": [
+        583,
+        753
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "850": {
+      "fn": "reduceXOR32",
+      "offset": [
+        57,
+        157
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "851": {
+      "fn": "reduceXOR32",
+      "offset": [
+        106,
+        112
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "853": {
+      "fn": "reduceXOR32",
+      "offset": [
+        134,
+        153
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 19,
+      "value": "0x26B"
+    },
+    "856": {
+      "fn": "reduceXOR32",
+      "offset": [
+        144,
+        148
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "857": {
+      "fn": "reduceXOR32",
+      "offset": [
+        150,
+        152
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "859": {
+      "fn": "reduceXOR32",
+      "offset": [
+        134,
+        143
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x3A5"
+    },
+    "862": {
+      "fn": "reduceXOR32",
+      "jump": "i",
+      "offset": [
+        134,
+        153
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "863": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1244,
+        1457
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "864": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1325
+      ],
+      "op": "DUP1",
+      "path": "0",
+      "statement": 20
+    },
+    "865": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1340
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x60"
+    },
+    "867": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1340
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "868": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1340
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "869": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1347
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "878": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1347
+      ],
+      "op": "AND",
+      "path": "0"
+    },
+    "879": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1344,
+        1347
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x100"
+    },
+    "882": {
+      "branch": 30,
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1347
+      ],
+      "op": "EQ",
+      "path": "0"
+    },
+    "883": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1373
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "884": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1373
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "885": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1373
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x381"
+    },
+    "888": {
+      "branch": 30,
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1373
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "889": {
+      "op": "POP"
+    },
+    "890": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1359
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "892": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1359
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "893": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1359
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "894": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1359
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "895": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1373
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "896": {
+      "branch": 31,
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1351,
+        1373
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "897": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1322,
+        1373
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "898": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x38A"
+    },
+    "901": {
+      "branch": 31,
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "902": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "904": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "905": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "REVERT",
+      "path": "0"
+    },
+    "906": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1314,
+        1374
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "907": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1409,
+        1417
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 21,
+      "value": "0x20"
+    },
+    "909": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1409,
+        1417
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "910": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1409,
+        1417
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "911": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1409,
+        1417
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "912": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1409,
+        1417
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "913": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        466,
+        473
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "915": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "916": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "917": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        500,
+        518
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "918": {
+      "fn": "bytes32Keccak",
+      "offset": [
+        535,
+        556
+      ],
+      "op": "KECCAK256",
+      "path": "0"
+    },
+    "919": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1384,
+        1392
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "921": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1384,
+        1392
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "922": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1384,
+        1392
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "923": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1384,
+        1418
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "924": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1449,
+        1450
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 22,
+      "value": "0x0"
+    },
+    "926": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1428,
+        1446
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x60"
+    },
+    "928": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1428,
+        1446
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "929": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1428,
+        1446
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "930": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1428,
+        1446
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "931": {
+      "fn": "Keccak256RG.updateWeed",
+      "offset": [
+        1428,
+        1450
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "932": {
+      "fn": "Keccak256RG.updateWeed",
+      "jump": "o",
+      "offset": [
+        1244,
+        1457
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "933": {
+      "fn": "reduceXOR",
+      "offset": [
+        159,
+        413
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "934": {
+      "fn": "reduceXOR",
+      "offset": [
+        224,
+        231
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "936": {
+      "fn": "reduceXOR",
+      "offset": [
+        247,
+        261
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 23,
+      "value": "0x3B3"
+    },
+    "939": {
+      "fn": "reduceXOR",
+      "offset": [
+        253,
+        261
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "940": {
+      "fn": "reduceXOR",
+      "offset": [
+        247,
+        250
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x100"
+    },
+    "943": {
+      "fn": "reduceXOR",
+      "offset": [
+        247,
+        261
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x500"
+    },
+    "946": {
+      "fn": "reduceXOR",
+      "jump": "i",
+      "offset": [
+        247,
+        261
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "947": {
+      "fn": "reduceXOR",
+      "offset": [
+        247,
+        261
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "948": {
+      "fn": "reduceXOR",
+      "offset": [
+        247,
+        266
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "949": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x3BD"
+    },
+    "952": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "953": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "955": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "956": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "REVERT",
+      "path": "0"
+    },
+    "957": {
+      "fn": "reduceXOR",
+      "offset": [
+        239,
+        267
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "958": {
+      "fn": "reduceXOR",
+      "offset": [
+        273,
+        284
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "960": {
+      "fn": "reduceXOR",
+      "offset": [
+        295,
+        312
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "961": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "962": {
+      "fn": "reduceXOR",
+      "offset": [
+        326,
+        329
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x100"
+    },
+    "965": {
+      "fn": "reduceXOR",
+      "offset": [
+        314,
+        323
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "966": {
+      "fn": "reduceXOR",
+      "offset": [
+        314,
+        329
+      ],
+      "op": "LT",
+      "path": "0"
+    },
+    "967": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "968": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x3E4"
+    },
+    "971": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "972": {
+      "fn": "reduceXOR",
+      "offset": [
+        371,
+        388
+      ],
+      "op": "DUP5",
+      "path": "0",
+      "statement": 24
+    },
+    "973": {
+      "fn": "reduceXOR",
+      "offset": [
+        371,
+        388
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "974": {
+      "fn": "reduceXOR",
+      "offset": [
+        371,
+        388
+      ],
+      "op": "SHL",
+      "path": "0"
+    },
+    "975": {
+      "fn": "reduceXOR",
+      "offset": [
+        364,
+        388
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "976": {
+      "fn": "reduceXOR",
+      "offset": [
+        364,
+        388
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "977": {
+      "fn": "reduceXOR",
+      "offset": [
+        364,
+        388
+      ],
+      "op": "SWAP2",
+      "path": "0"
+    },
+    "978": {
+      "fn": "reduceXOR",
+      "offset": [
+        364,
+        388
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "979": {
+      "fn": "reduceXOR",
+      "offset": [
+        364,
+        388
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "980": {
+      "fn": "reduceXOR",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 25,
+      "value": "0x3DD"
+    },
+    "983": {
+      "fn": "reduceXOR",
+      "offset": [
+        344,
+        352
+      ],
+      "op": "DUP5",
+      "path": "0"
+    },
+    "984": {
+      "fn": "reduceXOR",
+      "offset": [
+        379,
+        388
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "985": {
+      "fn": "reduceXOR",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x514"
+    },
+    "988": {
+      "fn": "reduceXOR",
+      "jump": "i",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "989": {
+      "fn": "reduceXOR",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "990": {
+      "fn": "reduceXOR",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "991": {
+      "fn": "reduceXOR",
+      "offset": [
+        331,
+        352
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "992": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x3C1"
+    },
+    "995": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "996": {
+      "fn": "reduceXOR",
+      "offset": [
+        290,
+        395
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "997": {
+      "op": "POP"
+    },
+    "998": {
+      "fn": "reduceXOR",
+      "offset": [
+        407,
+        410
+      ],
+      "op": "SWAP4",
+      "path": "0",
+      "statement": 26
+    },
+    "999": {
+      "fn": "reduceXOR",
+      "offset": [
+        159,
+        413
+      ],
+      "op": "SWAP3",
+      "path": "0"
+    },
+    "1000": {
+      "op": "POP"
+    },
+    "1001": {
+      "op": "POP"
+    },
+    "1002": {
+      "op": "POP"
+    },
+    "1003": {
+      "fn": "reduceXOR",
+      "jump": "o",
+      "offset": [
+        159,
+        413
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "1004": {
+      "op": "JUMPDEST"
+    },
+    "1005": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1007": {
+      "op": "DUP1"
+    },
+    "1008": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1010": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "1012": {
+      "op": "DUP5"
+    },
+    "1013": {
+      "op": "DUP7"
+    },
+    "1014": {
+      "op": "SUB"
+    },
+    "1015": {
+      "op": "SLT"
+    },
+    "1016": {
+      "op": "ISZERO"
+    },
+    "1017": {
+      "op": "PUSH2",
+      "value": "0x401"
+    },
+    "1020": {
+      "op": "JUMPI"
+    },
+    "1021": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1023": {
+      "op": "DUP1"
+    },
+    "1024": {
+      "op": "REVERT"
+    },
+    "1025": {
+      "op": "JUMPDEST"
+    },
+    "1026": {
+      "op": "DUP4"
+    },
+    "1027": {
+      "op": "CALLDATALOAD"
+    },
+    "1028": {
+      "op": "SWAP3"
+    },
+    "1029": {
+      "op": "POP"
+    },
+    "1030": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1032": {
+      "op": "DUP5"
+    },
+    "1033": {
+      "op": "ADD"
+    },
+    "1034": {
+      "op": "CALLDATALOAD"
+    },
+    "1035": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "1044": {
+      "op": "DUP2"
+    },
+    "1045": {
+      "op": "AND"
+    },
+    "1046": {
+      "op": "DUP2"
+    },
+    "1047": {
+      "op": "EQ"
+    },
+    "1048": {
+      "op": "PUSH2",
+      "value": "0x420"
+    },
+    "1051": {
+      "op": "JUMPI"
+    },
+    "1052": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1054": {
+      "op": "DUP1"
+    },
+    "1055": {
+      "op": "REVERT"
+    },
+    "1056": {
+      "op": "JUMPDEST"
+    },
+    "1057": {
+      "op": "SWAP3"
+    },
+    "1058": {
+      "op": "SWAP6"
+    },
+    "1059": {
+      "op": "SWAP3"
+    },
+    "1060": {
+      "op": "SWAP5"
+    },
+    "1061": {
+      "op": "POP"
+    },
+    "1062": {
+      "op": "POP"
+    },
+    "1063": {
+      "op": "POP"
+    },
+    "1064": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1066": {
+      "op": "SWAP2"
+    },
+    "1067": {
+      "op": "SWAP1"
+    },
+    "1068": {
+      "op": "SWAP2"
+    },
+    "1069": {
+      "op": "ADD"
+    },
+    "1070": {
+      "op": "CALLDATALOAD"
+    },
+    "1071": {
+      "op": "SWAP1"
+    },
+    "1072": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "1073": {
+      "op": "JUMPDEST"
+    },
+    "1074": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1076": {
+      "op": "DUP1"
+    },
+    "1077": {
+      "op": "DUP3"
+    },
+    "1078": {
+      "op": "MSTORE"
+    },
+    "1079": {
+      "op": "DUP3"
+    },
+    "1080": {
+      "op": "MLOAD"
+    },
+    "1081": {
+      "op": "DUP3"
+    },
+    "1082": {
+      "op": "DUP3"
+    },
+    "1083": {
+      "op": "ADD"
+    },
+    "1084": {
+      "op": "DUP2"
+    },
+    "1085": {
+      "op": "SWAP1"
+    },
+    "1086": {
+      "op": "MSTORE"
+    },
+    "1087": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1089": {
+      "op": "SWAP2"
+    },
+    "1090": {
+      "op": "SWAP1"
+    },
+    "1091": {
+      "op": "DUP5"
+    },
+    "1092": {
+      "op": "DUP3"
+    },
+    "1093": {
+      "op": "ADD"
+    },
+    "1094": {
+      "op": "SWAP1"
+    },
+    "1095": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1097": {
+      "op": "DUP6"
+    },
+    "1098": {
+      "op": "ADD"
+    },
+    "1099": {
+      "op": "SWAP1"
+    },
+    "1100": {
+      "op": "DUP5"
+    },
+    "1101": {
+      "op": "JUMPDEST"
+    },
+    "1102": {
+      "op": "DUP2"
+    },
+    "1103": {
+      "op": "DUP2"
+    },
+    "1104": {
+      "op": "LT"
+    },
+    "1105": {
+      "op": "ISZERO"
+    },
+    "1106": {
+      "op": "PUSH2",
+      "value": "0x469"
+    },
+    "1109": {
+      "op": "JUMPI"
+    },
+    "1110": {
+      "op": "DUP4"
+    },
+    "1111": {
+      "op": "MLOAD"
+    },
+    "1112": {
+      "op": "DUP4"
+    },
+    "1113": {
+      "op": "MSTORE"
+    },
+    "1114": {
+      "op": "SWAP3"
+    },
+    "1115": {
+      "op": "DUP5"
+    },
+    "1116": {
+      "op": "ADD"
+    },
+    "1117": {
+      "op": "SWAP3"
+    },
+    "1118": {
+      "op": "SWAP2"
+    },
+    "1119": {
+      "op": "DUP5"
+    },
+    "1120": {
+      "op": "ADD"
+    },
+    "1121": {
+      "op": "SWAP2"
+    },
+    "1122": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "1124": {
+      "op": "ADD"
+    },
+    "1125": {
+      "op": "PUSH2",
+      "value": "0x44D"
+    },
+    "1128": {
+      "op": "JUMP"
+    },
+    "1129": {
+      "op": "JUMPDEST"
+    },
+    "1130": {
+      "op": "POP"
+    },
+    "1131": {
+      "op": "SWAP1"
+    },
+    "1132": {
+      "op": "SWAP7"
+    },
+    "1133": {
+      "op": "SWAP6"
+    },
+    "1134": {
+      "op": "POP"
+    },
+    "1135": {
+      "op": "POP"
+    },
+    "1136": {
+      "op": "POP"
+    },
+    "1137": {
+      "op": "POP"
+    },
+    "1138": {
+      "op": "POP"
+    },
+    "1139": {
+      "op": "POP"
+    },
+    "1140": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "1141": {
+      "op": "JUMPDEST"
+    },
+    "1142": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1144": {
+      "op": "DUP1"
+    },
+    "1145": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1147": {
+      "op": "DUP4"
+    },
+    "1148": {
+      "op": "DUP6"
+    },
+    "1149": {
+      "op": "SUB"
+    },
+    "1150": {
+      "op": "SLT"
+    },
+    "1151": {
+      "op": "ISZERO"
+    },
+    "1152": {
+      "op": "PUSH2",
+      "value": "0x488"
+    },
+    "1155": {
+      "op": "JUMPI"
+    },
+    "1156": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1158": {
+      "op": "DUP1"
+    },
+    "1159": {
+      "op": "REVERT"
+    },
+    "1160": {
+      "op": "JUMPDEST"
+    },
+    "1161": {
+      "op": "POP"
+    },
+    "1162": {
+      "op": "POP"
+    },
+    "1163": {
+      "op": "DUP1"
+    },
+    "1164": {
+      "op": "CALLDATALOAD"
+    },
+    "1165": {
+      "op": "SWAP3"
+    },
+    "1166": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1168": {
+      "op": "SWAP1"
+    },
+    "1169": {
+      "op": "SWAP2"
+    },
+    "1170": {
+      "op": "ADD"
+    },
+    "1171": {
+      "op": "CALLDATALOAD"
+    },
+    "1172": {
+      "op": "SWAP2"
+    },
+    "1173": {
+      "op": "POP"
+    },
+    "1174": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "1175": {
+      "op": "JUMPDEST"
+    },
+    "1176": {
+      "op": "PUSH4",
+      "value": "0x4E487B71"
+    },
+    "1181": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1183": {
+      "op": "SHL"
+    },
+    "1184": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1186": {
+      "op": "MSTORE"
+    },
+    "1187": {
+      "op": "PUSH1",
+      "value": "0x41"
+    },
+    "1189": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1191": {
+      "op": "MSTORE"
+    },
+    "1192": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "1194": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1196": {
+      "op": "REVERT"
+    },
+    "1197": {
+      "op": "JUMPDEST"
+    },
+    "1198": {
+      "op": "PUSH4",
+      "value": "0x4E487B71"
+    },
+    "1203": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1205": {
+      "op": "SHL"
+    },
+    "1206": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1208": {
+      "op": "MSTORE"
+    },
+    "1209": {
+      "op": "PUSH1",
+      "value": "0x32"
+    },
+    "1211": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1213": {
+      "op": "MSTORE"
+    },
+    "1214": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "1216": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1218": {
+      "op": "REVERT"
+    },
+    "1219": {
+      "op": "JUMPDEST"
+    },
+    "1220": {
+      "op": "PUSH4",
+      "value": "0x4E487B71"
+    },
+    "1225": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1227": {
+      "op": "SHL"
+    },
+    "1228": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1230": {
+      "op": "MSTORE"
+    },
+    "1231": {
+      "op": "PUSH1",
+      "value": "0x12"
+    },
+    "1233": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1235": {
+      "op": "MSTORE"
+    },
+    "1236": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "1238": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1240": {
+      "op": "REVERT"
+    },
+    "1241": {
+      "op": "JUMPDEST"
+    },
+    "1242": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1244": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "1253": {
+      "op": "DUP1"
+    },
+    "1254": {
+      "op": "DUP5"
+    },
+    "1255": {
+      "op": "AND"
+    },
+    "1256": {
+      "op": "DUP1"
+    },
+    "1257": {
+      "op": "PUSH2",
+      "value": "0x4F4"
+    },
+    "1260": {
+      "op": "JUMPI"
+    },
+    "1261": {
+      "op": "PUSH2",
+      "value": "0x4F4"
+    },
+    "1264": {
+      "op": "PUSH2",
+      "value": "0x4C3"
+    },
+    "1267": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "1268": {
+      "op": "JUMPDEST"
+    },
+    "1269": {
+      "op": "SWAP3"
+    },
+    "1270": {
+      "op": "AND"
+    },
+    "1271": {
+      "op": "SWAP2"
+    },
+    "1272": {
+      "op": "SWAP1"
+    },
+    "1273": {
+      "op": "SWAP2"
+    },
+    "1274": {
+      "op": "MOD"
+    },
+    "1275": {
+      "op": "SWAP3"
+    },
+    "1276": {
+      "op": "SWAP2"
+    },
+    "1277": {
+      "op": "POP"
+    },
+    "1278": {
+      "op": "POP"
+    },
+    "1279": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "1280": {
+      "op": "JUMPDEST"
+    },
+    "1281": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1283": {
+      "op": "DUP3"
+    },
+    "1284": {
+      "op": "PUSH2",
+      "value": "0x50F"
+    },
+    "1287": {
+      "op": "JUMPI"
+    },
+    "1288": {
+      "op": "PUSH2",
+      "value": "0x50F"
+    },
+    "1291": {
+      "op": "PUSH2",
+      "value": "0x4C3"
+    },
+    "1294": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "1295": {
+      "op": "JUMPDEST"
+    },
+    "1296": {
+      "op": "POP"
+    },
+    "1297": {
+      "op": "MOD"
+    },
+    "1298": {
+      "op": "SWAP1"
+    },
+    "1299": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "1300": {
+      "op": "JUMPDEST"
+    },
+    "1301": {
+      "op": "DUP1"
+    },
+    "1302": {
+      "op": "DUP3"
+    },
+    "1303": {
+      "op": "ADD"
+    },
+    "1304": {
+      "op": "DUP1"
+    },
+    "1305": {
+      "op": "DUP3"
+    },
+    "1306": {
+      "op": "GT"
+    },
+    "1307": {
+      "op": "ISZERO"
+    },
+    "1308": {
+      "op": "PUSH2",
+      "value": "0x26B"
+    },
+    "1311": {
+      "op": "JUMPI"
+    },
+    "1312": {
+      "op": "PUSH4",
+      "value": "0x4E487B71"
+    },
+    "1317": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1319": {
+      "op": "SHL"
+    },
+    "1320": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1322": {
+      "op": "MSTORE"
+    },
+    "1323": {
+      "op": "PUSH1",
+      "value": "0x11"
+    },
+    "1325": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1327": {
+      "op": "MSTORE"
+    },
+    "1328": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "1330": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1332": {
+      "op": "REVERT"
     }
   },
-  "sha1": "042f2ad4a1aea566fd15d0dc22a44981a2ef34e0",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract RandomGeneratorTest {\n    constructor() {\n\n    }\n}",
-  "sourceMap": "57:59:1:-:0;;;92:22;;;;;;;;;;57:59;;;;;;",
+  "sha1": "1ee62f730527c1973c87bc05f81f2a5d99f9eb03",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport \"./RandomGenerator.sol\";\n\ncontract RandomGeneratorTest {\n    using Keccak256RG for Keccak256RG.KeccakRGState;\n    using LinearCongretureGenerator for LinearCongretureGenerator.LCGState;\n\n    function runKrng(bytes32 seed, uint64 yieldSize, uint256 count) public pure returns (uint256[] memory result10000s) {\n        result10000s = new uint256[](count);\n        Keccak256RG.KeccakRGState memory kst = Keccak256RG.init(seed, yieldSize);\n        for(uint256 i; i<count; i++) {\n            result10000s[i] = kst.yield10000();\n        }\n    }\n    function runlcg(bytes32 seed, uint256 count) public pure returns (uint256[] memory result10000s) {\n        result10000s = new uint256[](count);\n        LinearCongretureGenerator.LCGState memory lst = LinearCongretureGenerator.init(seed);\n        for(uint256 i; i<count; i++) {\n            result10000s[i] = lst.yield10000();\n        }\n    }\n}",
+  "sourceMap": "90:859:1:-:0;;;;;;;;;;;;;;;;;;;",
   "sourcePath": "contracts/RandomGeneratorTest.sol",
   "type": "contract"
 }

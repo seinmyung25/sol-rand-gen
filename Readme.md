@@ -5,4 +5,4 @@ python 3.12
 
 ## Usage
 
-brownie test
+`brownie run all`
